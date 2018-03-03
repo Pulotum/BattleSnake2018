@@ -5,13 +5,22 @@ import math
 
 def getClosestFood(data):
     
-    foods = []
+    meX = data.get('you').get('body').get('data')[0].get('x')
+    meY = data.get('you').get('body').get('data')[0].get('y')
+    
+    closestCord = []
+    closestDist = 1000
     
     for f in data.get('food').get('data'):
-        foods.append([f.get('x'),f.get('y')])
+        print 'food',f.get('x'),f.get('y')
         
-    print foods
-
+        curX = abs(meX - f.get('x'))
+        curY = abs(meY - f.get('y'))
+        curDist = curY + curX
+        
+        print curDist
+        
+        
 @bottle.route('/')
 def static():
     return "the server is running"
