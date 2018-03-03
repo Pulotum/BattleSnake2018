@@ -160,59 +160,59 @@ def start():
 @bottle.post('/move')
 def move():
 
-    #print '--------------------'
-    #print 'New Move'
-    #print '--------------------'
+    print '--------------------'
+    print 'New Move'
+    print '--------------------'
 
     data = bottle.request.json
     me = [data.get('you').get('body').get('data')[0].get('x'),data.get('you').get('body').get('data')[0].get('y')]
     last = [data.get('you').get('body').get('data')[1].get('x'),data.get('you').get('body').get('data')[1].get('y')]
 
-    #print 'prev - ',last
-    #print 'current - ',me
+    print 'prev - ',last
+    print 'current - ',me
     
     closest = getClosestFood(data, 0)
-    #print 'close food - ',closest
+    print 'close food - ',closest
     
     last = getDir(last,me,'','old',[])
-    #print 'coming from - ',last
+    print 'coming from - ',last
     
     dir = getDir(me,closest,last,'new',[])
-    #print 'going to - ',dir
+    print 'going to - ',dir
     next = nextPoint(me, dir)
-    #print 'next - ',next
+    print 'next - ',next
     
     result = isSafe(data, next, [])
-    #print 'is safe - ',result
+    print 'is safe - ',result
     
     notSafe = []
     
     while result != True:
-        #print '--not safe--'
+        print '--not safe--'
         
         notSafe.append(dir)
-        #print 'not safes - ', notSafe
+        print 'not safes - ', notSafe
         
         if dir == 'not':
             dir = last
         
         closest = getClosestFood(data, len(notSafe))
-        #print 'new closest - ',closest
+        print 'new closest - ',closest
         
         dir = getDir(me,closest,last,'new',notSafe)
-        #print 'new dir - ',dir
+        print 'new dir - ',dir
         
         next = nextPoint(me, dir)
-        #print 'new next - ',next
+        print 'new next - ',next
         
         result = isSafe(data, next, notSafe)
-        #print 'new result - ',result
+        print 'new result - ',result
     
     map = makeMap(data)
     
     '''
     for m in map:
-        #print m
+        print m
     '''
     
     # TODO: Do things with data
