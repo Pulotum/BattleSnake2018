@@ -148,7 +148,7 @@ def move():
 	'''	
 	return {
 		'move': 'left',
-		'taunt': getTaunt()
+		'taunt': 'fuck'
 	};
 
 # ---------- ---------- ----------
