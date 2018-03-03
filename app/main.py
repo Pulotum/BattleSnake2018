@@ -108,7 +108,10 @@ def start():
 def move():
     data = bottle.request.json
     me = [data.get('you').get('body').get('data')[0].get('x'),data.get('you').get('body').get('data')[0].get('y')]
-	
+    last = [data.get('you').get('body').get('data')[1].get('x'),data.get('you').get('body').get('data')[1].get('y')]
+    
+    print 'prev',getDir(me, last)
+    
     print 'me',me
     
     closest = getClosestFood(data);
