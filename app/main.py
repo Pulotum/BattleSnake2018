@@ -55,18 +55,20 @@ def getClosestFood(data):
 def doesPathExist(map, me, food):
     return True
 
-#takes [me] and [point] "last dir" "method"
+#takes [me] and [point] "last dir" "method" ['dir']
 #return direction
-def getDir(me, food, last, method):
+def getDir(me, food, last, method, old):
+    
+    dir = 'up'
     
     #get next direction towards point
-    if (me[1] > food[1]) and (last != 'down'):
+    if (me[1] > food[1]) and (last != 'down') and ('up' !in old):
         dir = 'up'
-    elif (me[1] < food[1]) and (last != 'up'):
+    elif (me[1] < food[1]) and (last != 'up') and ('down' !in old):
         dir = 'down'
-    elif (me[0] > food[0]) and (last != 'right'):
+    elif (me[0] > food[0]) and (last != 'right') and ('left' !in old):
         dir = 'left'
-    elif (me[0] < food[0]) and (last != 'left'):
+    elif (me[0] < food[0]) and (last != 'left') and ('right' !in old):
         dir = 'right'
     
     return dir
@@ -106,7 +108,7 @@ def isSafe(data, point,past):
         return True
     
     if safe == False:
-        return past.append([point[0],point[1]])
+        return False
     else:
         return True;
 
@@ -165,16 +167,23 @@ def move():
     next = nextPoint(me, dir)
     print 'next - ',next
     
-    result = isSafe(data, next, [])
+    result = isSafe(data, next)
     print 'is safe - ',result
+    
+    notSafe = []
     
     while result != True:
         print '--not safe--'
         
+        notSafe.append(dir)
+        
+        dir = getDir(me,closest,last,'new',notSafe)
+        print 'new dir - ',dir
+        
         next = nextPoint(me, dir)
         print 'new next - ',next
         
-        result = isSafe(data, next, result)
+        result = isSafe(data, next)
         print 'new result - ',result
     
     map = makeMap(data)
