@@ -23,10 +23,15 @@ def start():
 
 	head_url = 'https://thumb1.shutterstock.com/display_pic_with_logo/88356/107460737/stock-photo-beautiful-expressive-adorable-happy-cute-laughing-smiling-baby-infant-face-showing-tongue-isolated-107460737.jpg'
 	
+    head_url = '%s://%s/static/head.png' % (
+        bottle.request.urlparts.scheme,
+        bottle.request.urlparts.netloc
+    )
+	
     # TODO: Do things with data
 
     return {
-        'color': '#FF6666',
+        'color': '#00FF00',
         'taunt': 'BABY FACE',
         'head_url': head_url
     }
