@@ -20,9 +20,9 @@ def makeMap(data):
         map.append([0] * w)
         i = i + 1
       
-    for snake in data.get('snakes'):
+    for snake in data.get('snakes').get('data'):
         print 'snake',snake
-        for snek in snake:
+        for snek in snake.get('body').get('data'):
             print 'snek',snek
             map[snek.get('x'), snek.get('y')]
 
