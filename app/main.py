@@ -42,7 +42,7 @@ def move():
     print data.get('you').get('body')
     print data.get('you').get('body').get('data')
     me = data.get('you').get('body').get('data')[0]
-    print 'x',x.get('x')
+    print 'x',me.get('x')
 	
     # TODO: Do things with data
     
