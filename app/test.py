@@ -27,20 +27,24 @@ snakes = [
 	[3,4]
 ];
 			
-food = [4,4];
+food1 = [4,4];
+food2 = [2,1];
 
 # add snake to map
 for s in snakes:
 	map[s[1]][s[0]] = 1;
 
-
+#define grid with map
 grid = Grid(matrix=map)
 
+#define start and end
 start = grid.node(me[0], me[1]);
-end = grid.node(food[0], food[1]);
+end = grid.node(food2[0], food2[1]); #this will be closest food? maybe will go through all possible foods and get closest
 
+#define tracking algorithim
 finder = AStarFinder()
 path, runs = finder.find_path(start, end, grid)
+
 
 print('operations:', runs, 'path length:', len(path));
 print(path);
