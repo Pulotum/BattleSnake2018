@@ -24,10 +24,9 @@ def makeMap(data):
         for snek in snake.get('body').get('data'):
             map[snek.get('x')][snek.get('y')] = 's'
 
-    for snake in data.get('you').get('body'):
-        for snek in snake.get('data'):
-            map[snek.get('x')][snek.get('y')] = 'm'
-            
+    for snake in data.get('you').get('body').get('data'):
+        map[snek.get('x')][snek.get('y')] = 'm'
+          
     return map
 
 #takes data
