@@ -85,16 +85,17 @@ def static(path):
 
 @bottle.post('/start')
 def start():
-
+	'''
 	data = bottle.request.json;
 	game_id = data['game_id'];
 	board_width = data['width'];
 	board_height = data['height'];
-
+	'''
+	
 	head_url = 'https://thumb1.shutterstock.com/display_pic_with_logo/88356/107460737/stock-photo-beautiful-expressive-adorable-happy-cute-laughing-smiling-baby-infant-face-showing-tongue-isolated-107460737.jpg';
 	
 	# TODO: Do things with data
-
+	
 	return {
 		'color': '#ff6666',
 		'taunt': 'BABY GUNNA WIN',
@@ -147,8 +148,7 @@ def move():
 	
 	'''	
 	return {
-		'move': 'left',
-		'taunt': 'fuck'
+		'move': 'up'
 	};
 
 # ---------- ---------- ----------
