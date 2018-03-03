@@ -63,7 +63,8 @@ def move():
     meX = data.get('you').get('body').get('data')[0]
     meY = data.get('you').get('body').get('data')[1]
 	
-    print makeMap()
+    print meX, meY
+    #print makeMap()
     
     # TODO: Do things with data
     
