@@ -3,10 +3,7 @@ import os
 import random
 import math
 
-from pathfinding.core.grid import Grid
-from pathfinding.finder.a_star import AStarFinder
-
-#
+#takes data
 #return [x,y] array of cords
 def getClosestFood(data):
     
@@ -29,7 +26,21 @@ def getClosestFood(data):
     
     print closestCord
     return closestCord
+
+#takes [meX,meY] and [foodX,foodY]
+#return direction
+def getDir(me, food):
+    if me[0] > food[0]:
+        dir = 'down'
+    if me[0] < food[0]:
+        dir = 'up'
+    if me[1] > food[1]:
+        dir = 'left'
+    if me[1] < food[1]:
+        dir = 'right'
         
+    return dir
+
 @bottle.route('/')
 def static():
     return "the server is running"
@@ -67,17 +78,17 @@ def move():
     meY = data.get('you').get('body').get('data')[0].get('y')
 	
     print meX, meY
-    #print makeMap()
     
     closest = getClosestFood(data);
+    dir = getDir([meX,meY],closest)
     
     # TODO: Do things with data
     
     directions = ['up', 'down', 'left', 'right']
     direction = random.choice(directions)
-    print direction
+    print dir
     return {
-        'move': direction,
+        'move': dir,
         'taunt': 'BABY FACE'
     }
 

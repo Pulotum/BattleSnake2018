@@ -65,7 +65,7 @@ def getClosestFood(data, grid):
         if(currentDist < closestDist):
             #check path exists
             path, runs = finder.find_path((meX,meY), (item[0], item[1]), grid);
-                if len(path) > 0:
+               if len(path) > 0:
                     closestDist = currentDist;
                     closestCord = item;
           
