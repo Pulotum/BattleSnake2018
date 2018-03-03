@@ -3,29 +3,6 @@ import os
 import random
 import math
 
-from pathfinding.core.grid import Grid
-from pathfinding.finder.a_star import AStarFinder
-
-def makeMap(data):
-    w = data.get('width')
-    h = data.get('height')
-    
-    map = []
-    
-    i = 0
-    while i < h:
-        print i
-        map.append([0] * w)
-        i = i + 1
-        
-    print map[0]
-    
-    for snek in data.get('snakes'):
-        for snuk in snek.get('data'):
-            map[snuk[0], snuk[1]] = 1
-            
-    return map
-
 @bottle.route('/')
 def static():
     return "the server is running"
@@ -43,17 +20,16 @@ def start():
     board_width = data.get('width')
     board_height = data.get('height')
 
-    head_url = '%s://%s/static/head.png' % (
-        bottle.request.urlparts.scheme,
-        bottle.request.urlparts.netloc
-    )
-
+    head_url = 'https://thumb1.shutterstock.com/display_pic_with_logo/88356/107460737/stock-photo-beautiful-expressive-adorable-happy-cute-laughing-smiling-baby-infant-face-showing-tongue-isolated-107460737.jpg'
+    
     # TODO: Do things with data
 
     return {
         'color': '#FF6666',
         'taunt': 'BABY FACE WILL WIN',
-        'head_url': head_url
+        'head_url': head_url,
+        '"head_type': 'pixel',
+        'tail_type': 'pixel'
     }
 
 
