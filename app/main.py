@@ -8,7 +8,7 @@ import math
 #   [o,o,o]
 #   [1,o,o]
 #   [o,o,o]
-def makeMap(data):
+def makeMap(data, allSnakes):
     
     w = data.get('width')
     h = data.get('height')
@@ -17,15 +17,11 @@ def makeMap(data):
     
     i = 0
     while i < h:
-        map.append(['0'] * w)
+        map.append(['.'] * w)
         i = i + 1
       
-    for snake in data.get('snakes').get('data'):
-        for snek in snake.get('body').get('data'):
-            map[snek.get('x')][snek.get('y')] = 's'
-
-    for snake in data.get('you').get('body').get('data'):
-        map[snek.get('x')][snek.get('y')] = 'm'
+    for snake in allSnakes:
+        map[snake[0]][snake[1]] = 's'
           
     return map
 
@@ -173,63 +169,61 @@ def start():
 @bottle.post('/move')
 def move():
 
-    #print '--------------------'
-    #print 'New Move'
-    #print '--------------------'
+    print '--------------------'
+    print 'New Move'
+    print '--------------------'
 
     data = bottle.request.json
     me = [data.get('you').get('body').get('data')[0].get('x'),data.get('you').get('body').get('data')[0].get('y')]
     last = [data.get('you').get('body').get('data')[1].get('x'),data.get('you').get('body').get('data')[1].get('y')]
 
-    #print 'prev - ',last
-    #print 'current - ',me
+    print 'prev - ',last
+    print 'current - ',me
     
     closest = getClosestFood(data, 0)
-    #print 'close food - num 0',closest
+    print 'close food - num 0',closest
     
     last = getDir(last,me,'','old',[])
-    #print 'coming from - ',last
+    print 'coming from - ',last
     
     dir = getDir(me,closest,last,'new',[])
-    #print 'going to - ',dir
+    print 'going to - ',dir
     next = nextPoint(me, dir)
-    #print 'next - ',next
+    print 'next - ',next
     
     allSnakes = getAllSnakes(data)
-    #print 'all snakes - ',allSnakes
+    print 'all snakes - ',allSnakes
     
     result = isSafe(data, next, [], allSnakes)
-    #print 'is safe - ',result
+    print 'is safe - ',result
     
     notSafe = []
     
     while result != True:
-        #print '--not safe--'
+        print '--not safe--'
         
         notSafe.append(dir)
-        #print 'not safes - ', notSafe
+        print 'not safes - ', notSafe
         
         if dir == 'not':
             dir = last
         
         closest = getClosestFood(data, len(notSafe))
-        #print 'new closest - num',len(notSafe),closest
+        print 'new closest - num',len(notSafe),closest
         
         dir = getDir(me,closest,last,'new',notSafe)
-        #print 'new dir - ',dir
+        print 'new dir - ',dir
         
         next = nextPoint(me, dir)
-        #print 'new next - ',next
+        print 'new next - ',next
         
         result = isSafe(data, next, notSafe,allSnakes)
-        #print 'new result - ',result
+        print 'new result - ',result
     
-    '''
     map = makeMap(data)
     
     for m in map:
-        #print m
-    '''
+        print m
     
     # TODO: Do things with data
     
