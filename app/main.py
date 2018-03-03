@@ -55,10 +55,11 @@ def getClosestFood(data):
 def doesPathExist(map, me, food):
     return True
 
-#takes [me] and [food]
+#takes [me] and [point] "last dir" "method"
 #return direction
-def getDir(me, food, last):
-
+def getDir(me, food, last, method):
+    
+    #get next direction towards point
     if (me[1] > food[1]) and (last != 'down'):
         dir = 'up'
     elif (me[1] < food[1]) and (last != 'up'):
@@ -67,8 +68,37 @@ def getDir(me, food, last):
         dir = 'left'
     elif (me[0] < food[0]) and (last != 'left'):
         dir = 'right'
-        
+    
     return dir
+
+#takes [me] 'dir'
+#return [new]
+def nextPoint(me, dir):
+    new = []
+    
+    if dir == 'up':
+        new = [me[0],me[1]-1]
+    elif dir == 'down':
+        new = [me[0],me[1]+1]
+    elif dir == 'left':
+        new = [me[0]-1,me[1]]
+    elif dir == 'right':
+        new = [me[0]+1,me[1]]
+
+    return new
+    
+#takes [point], ["past"]
+#return bool for safety
+def isSafe(point,past):
+
+    safe = True
+    #check if point is in snakes or me
+    
+    
+    if safe == False:
+        return past.append(point)
+    else:
+        return True;
 
 @bottle.route('/')
 def static():
@@ -105,20 +135,32 @@ def move():
     data = bottle.request.json
     me = [data.get('you').get('body').get('data')[0].get('x'),data.get('you').get('body').get('data')[0].get('y')]
     last = [data.get('you').get('body').get('data')[1].get('x'),data.get('you').get('body').get('data')[1].get('y')]
-    
-    last = getDir(last,me,'')
-    
-    print 'prev',last
-    
-    print 'me',me
+
+    print 'prev - ',last
+    print 'current - ',me
     
     closest = getClosestFood(data);
+    print 'close food - ',closest
     
-    print 'close',closest
+    last = getDir(last,me,'','old')
+    print 'coming from - ',last
     
-    dir = getDir(me,closest,last)
+    dir = getDir(me,closest,last,'new')
+    print 'going to - ',dir
+    next = nextPoint(me, dir)
+    print 'next - ',next
     
-    print 'dir',dir
+    result = isSafe(next, [])
+    print 'is safe - ',result
+    
+    while result != True:
+        print '--not safe--'
+        
+        next = nextPoint(me, dir)
+        print 'new next - ',next
+        
+        result = isSafe(next, result)
+        print 'new result - ',result
     
     map = makeMap(data)
     
