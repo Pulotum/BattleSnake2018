@@ -5,8 +5,12 @@ import math
 
 def getClosestFood(data):
     
+    foods = []
+    
     for f in data.get('food').get('data'):
-        print 'food ',f.get('x'),'x',f.get('y')
+        foods.append([f.get('x'),f.get('y')])
+        
+    print foods
 
 @bottle.route('/')
 def static():
