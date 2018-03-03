@@ -3,6 +3,11 @@ import os
 import random
 import math
 
+def getClosestFood(data):
+    
+    for f in data.get('food').get('body').get('data'):
+        print 'food ',f.get('x'),'x',f.get('y')
+
 @bottle.route('/')
 def static():
     return "the server is running"
@@ -36,11 +41,13 @@ def start():
 @bottle.post('/move')
 def move():
     data = bottle.request.json
-    meX = data.get('you').get('body').get('data')[0]
-    meY = data.get('you').get('body').get('data')[1]
+    meX = data.get('you').get('body').get('data')[0].get('x')
+    meY = data.get('you').get('body').get('data')[0].get('y')
 	
     print meX, meY
     #print makeMap()
+    
+    getClosestFood(data);
     
     # TODO: Do things with data
     
