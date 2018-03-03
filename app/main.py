@@ -28,9 +28,9 @@ def getClosestFood(data):
 #return direction
 def getDir(me, food):
     if me[0] > food[0]:
-        dir = 'down'
-    elif me[0] < food[0]:
         dir = 'up'
+    elif me[0] < food[0]:
+        dir = 'down'
     elif me[1] > food[1]:
         dir = 'left'
     elif me[1] < food[1]:
@@ -73,15 +73,15 @@ def move():
     data = bottle.request.json
     me = [data.get('you').get('body').get('data')[0].get('x'),data.get('you').get('body').get('data')[0].get('y')]
 	
-    print me
+    print 'me',me
     
     closest = getClosestFood(data);
     
-    print closest
+    print 'close',closest
     
     dir = getDir(me,closest)
     
-    print dir
+    print 'dir',dir
     
     # TODO: Do things with data
     
