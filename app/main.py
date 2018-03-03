@@ -29,15 +29,20 @@ def makeMap(data):
           
     return map
 
-#takes data
+#takes data, number of closet
 #return [x,y] array of cords
-def getClosestFood(data):
+def getClosestFood(data, num):
     
     meX = data.get('you').get('body').get('data')[0].get('x')
     meY = data.get('you').get('body').get('data')[0].get('y')
     
+    pastCord = []
+    pastDist = []
+    
     closestCord = []
     closestDist = 1000
+    
+    i = 0
     
     for f in data.get('food').get('data'):
         curX = abs(meX - f.get('x'))
@@ -45,10 +50,20 @@ def getClosestFood(data):
         curDist = curY + curX
         
         if curDist < closestDist:
+        
+            if i > 0:
+                pastCord.append(closestCord)
+                pastDist.append(closestDist)
+        
+            i = i + 1
+        
             closestDist = curDist
             closestCord = [f.get('x'),f.get('y')]
     
-    return closestCord
+    if num == 0:
+        return closestCord
+    else:
+        return pastCord[num]
 
 #takes map, [me], [food]
 #return bool
@@ -156,7 +171,7 @@ def move():
     print 'prev - ',last
     print 'current - ',me
     
-    closest = getClosestFood(data);
+    closest = getClosestFood(data, 0)
     print 'close food - ',closest
     
     last = getDir(last,me,'','old',[])
@@ -178,11 +193,14 @@ def move():
         notSafe.append(dir)
         print 'not safes - ', notSafe
         
-        dir = getDir(me,closest,last,'new',notSafe)
-        print 'new dir - ',dir
-        
         if dir == 'not':
             dir = last
+        
+        closest = getClosestFood(data, len(notSafe))
+        print 'new closest - ',closest
+        
+        dir = getDir(me,closest,last,'new',notSafe)
+        print 'new dir - ',dir
         
         next = nextPoint(me, dir)
         print 'new next - ',next
