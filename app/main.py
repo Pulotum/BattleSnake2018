@@ -4,6 +4,29 @@ import random
 import math
 
 #takes data
+#returns 2d array of map
+#   [o,o,o]
+#   [1,o,o]
+#   [o,o,o]
+def makeMap(data):
+    
+    w = data.get('width')
+    h = data.get('height')
+    
+    map = []
+    
+    i = 0
+    while i < h:
+        map.append([0] * w)
+        i = i + 1
+      
+    for snake in data.get('snakes'):
+        for snek in snake.get('data'):
+            map[snek.get('x'), snek.get('y')]
+
+    return map
+
+#takes data
 #return [x,y] array of cords
 def getClosestFood(data):
     
@@ -24,7 +47,12 @@ def getClosestFood(data):
     
     return closestCord
 
-#takes [meX,meY] and [foodX,foodY]
+#takes map, [me], [food]
+#return bool
+def doesPathExist(map, me, food):
+    return True
+
+#takes [me] and [food]
 #return direction
 def getDir(me, food):
 
@@ -87,6 +115,11 @@ def move():
     dir = getDir(me,closest)
     
     print 'dir',dir
+    
+    map = makeMap(data)
+    
+    for m in map:
+        print m
     
     # TODO: Do things with data
     
