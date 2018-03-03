@@ -67,7 +67,7 @@ def getClosestFood(data, num):
 
 #takes map, [me], [food]
 #return bool
-def getAllSnakes():
+def getAllSnakes(data):
     snakes = []
     
     for snake in data.get('snakes').get('data'):
@@ -117,7 +117,7 @@ def nextPoint(me, dir):
 #return bool for safety
 def isSafe(data, point, old):
 
-    allSnakes = getAllSnakes()
+    allSnakes = getAllSnakes(data)
 
     print 'all snakes - ',allSnakes
     
