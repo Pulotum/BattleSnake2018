@@ -89,7 +89,7 @@ def nextPoint(me, dir):
     
 #takes [point], ["past"]
 #return bool for safety
-def isSafe(point,past):
+def isSafe(data, point,past):
 
     safe = True
     #check if point is in snakes or me
@@ -157,7 +157,7 @@ def move():
     next = nextPoint(me, dir)
     print 'next - ',next
     
-    result = isSafe(next, [])
+    result = isSafe(data, next, [])
     print 'is safe - ',result
     
     while result != True:
@@ -166,7 +166,7 @@ def move():
         next = nextPoint(me, dir)
         print 'new next - ',next
         
-        result = isSafe(next, result)
+        result = isSafe(data, next, result)
         print 'new result - ',result
     
     map = makeMap(data)
