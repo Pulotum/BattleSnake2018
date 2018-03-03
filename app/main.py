@@ -21,12 +21,13 @@ def makeMap(data):
         i = i + 1
       
     for snake in data.get('snakes').get('data'):
-        print 'snake',snake
         for snek in snake.get('body').get('data'):
-            print 'snek',snek
-            print 'x',snek.get('x')
             map[snek.get('x')][snek.get('y')] = 's'
 
+    for snake in data.get('you').get('body'):
+        for snek in snake.get('data'):
+            map[snek.get('x')][snek.get('y')] = 'm'
+            
     return map
 
 #takes data
@@ -57,20 +58,16 @@ def doesPathExist(map, me, food):
 
 #takes [me] and [food]
 #return direction
-def getDir(me, food):
+def getDir(me, food, last=""):
 
-    if me[1] > food[1]:
+    if (me[1] > food[1]) and (last != 'up'):
         dir = 'up'
-        print 'food is higher'
-    elif me[1] < food[1]:
+    elif (me[1] < food[1]) and (last != 'down'):
         dir = 'down'
-        print 'food is lower'
-    elif me[0] > food[0]:
+    elif (me[0] > food[0]) and (last != 'left'):
         dir = 'left'
-        print 'food is more left'
-    elif me[0] < food[0]:
+    elif (me[0] < food[0]) and (last != 'right'):
         dir = 'right'
-        print 'food is more right'
         
     return dir
 
@@ -110,7 +107,9 @@ def move():
     me = [data.get('you').get('body').get('data')[0].get('x'),data.get('you').get('body').get('data')[0].get('y')]
     last = [data.get('you').get('body').get('data')[1].get('x'),data.get('you').get('body').get('data')[1].get('y')]
     
-    print 'prev',getDir(me, last)
+    last = getDir(last,me)
+    
+    print 'prev',last
     
     print 'me',me
     
@@ -118,7 +117,7 @@ def move():
     
     print 'close',closest
     
-    dir = getDir(me,closest)
+    dir = getDir(me,closest,last)
     
     print 'dir',dir
     
