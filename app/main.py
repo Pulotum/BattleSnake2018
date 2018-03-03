@@ -76,7 +76,7 @@ def getClosestFood(data, grid):
 
 @bottle.route('/')
 def static():
-    return "the server is running"			
+    return "the server is running";			
 
 @bottle.route('/static/<path:path>')
 def static(path):
@@ -115,6 +115,7 @@ def move():
 	
 	data = bottle.request.json;
 	
+	'''
 	uid = data["you"];
 	snakes = data["snakes"];
 	
@@ -144,7 +145,7 @@ def move():
 
 	print ("wanted movement -", movement);
 	
-		
+	'''	
 	return {
 		'move': 'left',
 		'taunt': getTaunt()
