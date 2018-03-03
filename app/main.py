@@ -1,8 +1,27 @@
 import bottle
 import os
 import random
+import math
 
+from pathfinding.core.grid import Grid
+from pathfinding.finder.a_star import AStarFinder
 
+def makeMap(data):
+    w = data.get('width')
+    h = data.get('height')
+    
+    map = []
+    
+    i = 0
+    while i < h:
+        map.append([0] * w)
+        i = i + 1
+        
+    for snek in data.get('snakes'):
+        for snuk in snek.get('data'):
+            map[snuk[0], snuk[1]] = 1
+            
+    return map
 
 @bottle.route('/')
 def static():
@@ -38,12 +57,11 @@ def start():
 @bottle.post('/move')
 def move():
     data = bottle.request.json
-    print data.get('you')
-    print data.get('you').get('body')
-    print data.get('you').get('body').get('data')
-    me = data.get('you').get('body').get('data')[0]
-    print 'x',me.get('x')
+    meX = data.get('you').get('body').get('data')[0]
+    meY = data.get('you').get('body').get('data')[1]
 	
+    print makeMap()
+    
     # TODO: Do things with data
     
     directions = ['up', 'down', 'left', 'right']
