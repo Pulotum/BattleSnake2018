@@ -101,7 +101,10 @@ def isSafe(data, point,past):
     for snake in data.get('you').get('body').get('data'):
         if (point[0] == snek.get('x')) and (point[1] == snek.get('y')):
             safe = False
-            
+    
+    if len(past) > 3:
+        return True
+    
     if safe == False:
         return past.append(point)
     else:
