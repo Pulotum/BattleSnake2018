@@ -41,8 +41,7 @@ def move():
 
 	me = data.get('you')
 	
-	print 'x', me.get('')[0][0]
-	print 'x', me.get('')[0][0]
+	print 'x', me
 	
     # TODO: Do things with data
     
