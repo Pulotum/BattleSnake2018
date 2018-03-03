@@ -106,7 +106,7 @@ def isSafe(data, point,past):
         return True
     
     if safe == False:
-        return past.append(point)
+        return past.append([point[0]],[point[1]])
     else:
         return True;
 
