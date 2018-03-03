@@ -13,7 +13,7 @@ def getClosestFood(data):
     closestCord = []
     closestDist = 1000
     
-    for f in data.get('food').get('data')
+    for f in data.get('food').get('data'):
         curX = abs(meX - f.get('x'))
         curY = abs(meY - f.get('y'))
         curDist = curY + curX
