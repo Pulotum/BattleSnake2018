@@ -62,22 +62,18 @@ def getDir(me, food, last, method, old):
     dir = 'up'
     
     #get next direction towards point
-    if (me[1] > food[1]) and (last != 'down'):
-        if 'up' not in old:
-            print 'up nit in old'
-            dir = 'up'
-    elif (me[1] < food[1]) and (last != 'up'):
-        if 'down' not in old:
-            print 'down nit in old'
-            dir = 'down'
-    elif (me[0] > food[0]) and (last != 'right'):
-        if 'left' not in old:
-            print 'left not in old'
-            dir = 'left'
-    elif (me[0] < food[0]) and (last != 'left'):
-        if 'right' not in old:
-            print 'right not in old'
-            dir = 'right'
+    if (me[1] > food[1]) and (last != 'down') and ('up' not in old):
+        print 'up nit in old'
+        dir = 'up'
+    elif (me[1] < food[1]) and (last != 'up') and ('down' not in old):
+        print 'down nit in old'
+        dir = 'down'
+    elif (me[0] > food[0]) and (last != 'right') and ('left' not in old):
+        print 'left not in old'
+        dir = 'left'
+    elif (me[0] < food[0]) and (last != 'left') and ('right' not in old):
+        print 'right not in old'
+        dir = 'right'
     
     return dir
 
