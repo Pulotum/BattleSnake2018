@@ -21,9 +21,9 @@ def makeMap(data):
         i = i + 1
       
     for snake in data.get('snakes'):
-        print snake
-        for snek in snake.get('body'):
-            print snek
+        print 'snake',snake
+        for snek in snake:
+            print 'snek',snek
             map[snek.get('x'), snek.get('y')]
 
     return map
