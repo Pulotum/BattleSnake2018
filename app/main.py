@@ -17,7 +17,7 @@ def makeMap(data):
     
     i = 0
     while i < h:
-        map.append([0] * w)
+        map.append(['0'] * w)
         i = i + 1
       
     for snake in data.get('snakes').get('data'):
@@ -57,7 +57,7 @@ def doesPathExist(map, me, food):
 
 #takes [me] and [food]
 #return direction
-def getDir(me, food, last=""):
+def getDir(me, food, last):
 
     if (me[1] > food[1]) and (last != 'up'):
         dir = 'up'
@@ -106,7 +106,7 @@ def move():
     me = [data.get('you').get('body').get('data')[0].get('x'),data.get('you').get('body').get('data')[0].get('y')]
     last = [data.get('you').get('body').get('data')[1].get('x'),data.get('you').get('body').get('data')[1].get('y')]
     
-    last = getDir(last,me)
+    last = getDir(last,me,'')
     
     print 'prev',last
     
