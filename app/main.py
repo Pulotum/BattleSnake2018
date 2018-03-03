@@ -3,13 +3,6 @@ import os
 import random
 import math
 
-
-def getTaunt():
-	taunts = ['I AM A BABY']
-				
-	return random.choice(taunts)
-
-
 def isSnakeClose(data):
 	uid = data["you"]
 	snakes = data["snakes"]
