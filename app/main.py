@@ -13,7 +13,7 @@ def static():
 def static(path):
     return bottle.static_file(path, root='static/')
 
-
+    
 @bottle.post('/start')
 def start():
     data = bottle.request.json
@@ -38,8 +38,8 @@ def start():
 @bottle.post('/move')
 def move():
     data = bottle.request.json
-	print data
-	
+    print data
+    
     # TODO: Do things with data
     
     directions = ['up', 'down', 'left', 'right']
