@@ -29,11 +29,11 @@ def getClosestFood(data):
 def getDir(me, food):
     if me[0] > food[0]:
         dir = 'down'
-    if me[0] < food[0]:
+    elif me[0] < food[0]:
         dir = 'up'
-    if me[1] > food[1]:
+    elif me[1] > food[1]:
         dir = 'left'
-    if me[1] < food[1]:
+    elif me[1] < food[1]:
         dir = 'right'
         
     return dir
