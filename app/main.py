@@ -172,7 +172,7 @@ def move():
     print 'current - ',me
     
     closest = getClosestFood(data, 0)
-    print 'close food - ',closest
+    print 'close food - num 0',closest
     
     last = getDir(last,me,'','old',[])
     print 'coming from - ',last
@@ -197,7 +197,7 @@ def move():
             dir = last
         
         closest = getClosestFood(data, len(notSafe))
-        print 'new closest - ',closest
+        print 'new closest - num',len(notSafe),closest
         
         dir = getDir(me,closest,last,'new',notSafe)
         print 'new dir - ',dir
