@@ -93,8 +93,15 @@ def isSafe(point,past):
 
     safe = True
     #check if point is in snakes or me
-    
-    
+    for snake in data.get('snakes').get('data'):
+        for snek in snake.get('body').get('data'):
+            if (point[0] == snek.get('x')) and (point[1] == snek.get('y')):
+                safe = False
+
+    for snake in data.get('you').get('body').get('data'):
+        if (point[0] == snek.get('x')) and (point[1] == snek.get('y')):
+            safe = False
+            
     if safe == False:
         return past.append(point)
     else:
@@ -164,8 +171,10 @@ def move():
     
     map = makeMap(data)
     
+    '''
     for m in map:
         print m
+    '''
     
     # TODO: Do things with data
     
