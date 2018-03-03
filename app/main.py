@@ -39,6 +39,11 @@ def start():
 def move():
     data = bottle.request.json
 
+	me = data.get('you')
+	
+	print 'x', me.get('')[0][0]
+	print 'x', me.get('')[0][0]
+	
     # TODO: Do things with data
     
     directions = ['up', 'down', 'left', 'right']
