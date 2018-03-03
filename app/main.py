@@ -3,6 +3,8 @@ import os
 import random
 import math
 
+#
+#return [x,y] array of cords
 def getClosestFood(data):
     
     meX = data.get('you').get('body').get('data')[0].get('x')
@@ -18,8 +20,12 @@ def getClosestFood(data):
         curY = abs(meY - f.get('y'))
         curDist = curY + curX
         
-        print curDist
-        
+        if curDist < closestDist:
+            closestDist = curDist
+            closestCord = [f.get('x'),f.get('y')]
+    
+    print closestCord
+    return closestCord
         
 @bottle.route('/')
 def static():
@@ -60,7 +66,7 @@ def move():
     print meX, meY
     #print makeMap()
     
-    getClosestFood(data);
+    closest = getClosestFood(data);
     
     # TODO: Do things with data
     
