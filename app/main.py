@@ -14,9 +14,12 @@ def makeMap(data):
     
     i = 0
     while i < h:
+        print i
         map.append([0] * w)
         i = i + 1
         
+    print map[0]
+    
     for snek in data.get('snakes'):
         for snuk in snek.get('data'):
             map[snuk[0], snuk[1]] = 1
