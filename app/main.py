@@ -74,91 +74,6 @@ def getClosestFood(data, grid):
 	
 	return closestCord;
 
-# ---------- ---------- ----------
-# - Is next sqaure dangerous
-# ----------
-# return bool of if next square is traversable
-#
-# ---------- ---------- ----------	
-def isDangerSquare(data, next, check):
-	uid = data["you"];
-	dangers = [];
-	lengths = [];
-	myLength = 0;
-	
-	snakes = data["snakes"];
-	
-	for snake in snakes:
-		if(snake["id"] != uid):
-			nuw = [snake["coords"][0], len(snake["coords"])];
-			lengths.append(nuw);
-		if(snake["id"] == uid):
-			myLength = len(snake["coords"]);
-		
-	print (lengths);	
-	
-	for snake in snakes:
-		curds = snake["coords"];
-		for cord in curds:
-			dangers.append(cord);
-		#area around enemy snake head
-		if(snake["id"] != data["you"]):
-			head = snake["coords"][0];
-			#right
-			dangers.append([head[0] + 1, head[1]]);
-			#left
-			dangers.append([head[0] - 1, head[1]]);
-			#up
-			dangers.append([head[0], head[1] - 1]);
-			#down
-			dangers.append([head[0], head[1] + 1]);
-		print ("danger -", dangers);
-	
-	if(next in dangers):
-		'''
-		for snuk in lengths:
-			if (snuk[1] >= myLength):
-				print "--Square taken"
-				return True	
-			else:
-				print "--take but smaller"
-		'''		
-				
-		return True;
-	else:
-		if((next[0] < 0) or (next[0] >= data["width"])):
-			print ("Wall on x plane");
-			return True;
-		if((next[1] < 0) or (next[1] >= data["height"])):
-			print ("Wall on y plane");
-			return True;
-					
-		print ("--Square is good");
-		
-		if(check):
-			'''
-			#--check next bunch
-			closestCord = getClosestFood(data)
-			
-			if((closestCord[0] < next[0])):
-				wantedSquare = [next[0] - 1, next[1]]
-			elif((closestCord[0] > next[0])):
-				wantedSquare = [next[0] + 1, next[1]]
-			elif((closestCord[1] > next[1])):
-				wantedSquare = [next[0], next[1] + 1]
-			elif((closestCord[1] < next[1])):
-				wantedSquare = [next[0], next[1] - 1]
-
-			isTaken = isDangerSquare(data, wantedSquare, False)
-			if(isTaken):
-				return True
-			else:
-				return False
-			'''
-			return False;
-		else:
-			return False;
-
 @bottle.route('/')
 def static():
     return "the server is running"			
@@ -210,9 +125,9 @@ def move():
 	meX = me["coords"][0][0];
 	meY = me["coords"][0][1];
 
-        grid = makeMap(data);
+	#grid = makeMap(data);
 	
-	closestCord = getClosestFood(data, grid);
+	#closestCord = getClosestFood(data, grid);
 		
 	if((closestCord[0] < meX)):
 		movement = 'left';
@@ -229,66 +144,9 @@ def move():
 
 	print ("wanted movement -", movement);
 	
-	isGood = isDangerSquare(data, wantedSquare, True);
-	
-	if(isGood):
-		#----
-		if(movement == 'right'):
-			if(isDangerSquare(data, [meX, meY - 1], True)):
-				if(isDangerSquare(data, [meX, meY + 1], True)):
-					if(isDangerSquare(data, [meX - 1, meY], True)):
-						movement = 'right';
-					else:
-						movement = 'left';
-				else:
-					movement = 'down';
-			else:
-				movement = 'up';
-		#----
-		elif(movement == 'left'):
-			if(isDangerSquare(data, [meX, meY - 1], True)):
-				if(isDangerSquare(data, [meX, meY + 1], True)):
-					if(isDangerSquare(data, [meX + 1, meY], True)):
-						movement = 'left';
-					else:
-						movement = 'right';
-				else:
-					movement = 'down';
-			else:
-				movement = 'up';
-		#---
-		elif(movement == 'down'):
-			if(isDangerSquare(data, [meX, meY - 1], True)):
-				if(isDangerSquare(data, [meX - 1, meY], True)):
-					if(isDangerSquare(data, [meX + 1, meY], True)):
-						movement = 'down';
-					else:
-						movement = 'right';
-				else:
-					movement = 'left';
-			else:
-				movement = 'up';
-		#---
-		elif(movement == 'up'):
-			if(isDangerSquare(data, [meX, meY + 1], True)):
-				if(isDangerSquare(data, [meX - 1, meY], True)):
-					if(isDangerSquare(data, [meX + 1, meY], True)):
-						movement = 'up';
-					else:
-						movement = 'right';
-				else:
-					movement = 'left';
-			else:
-				movement = 'down';
-		#---
-	
-	print ("Next Check -------");
 		
-	
-	# TODO: Do things with data	
-	
 	return {
-		'move': movement,
+		'move': 'left',
 		'taunt': getTaunt()
 	};
 
