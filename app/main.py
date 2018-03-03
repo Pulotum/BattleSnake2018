@@ -28,16 +28,16 @@ def getClosestFood(data):
 #return direction
 def getDir(me, food):
 
-    if me[0] > food[0]:
+    if me[1] > food[1]:
         dir = 'up'
         print 'food is higher'
-    elif me[0] < food[0]:
+    elif me[1] < food[1]:
         dir = 'down'
         print 'food is lower'
-    elif me[1] > food[1]:
+    elif me[0] > food[0]:
         dir = 'left'
         print 'food is more left'
-    elif me[1] < food[1]:
+    elif me[0] < food[0]:
         dir = 'right'
         print 'food is more right'
         
