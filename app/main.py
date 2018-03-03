@@ -159,10 +159,10 @@ def move():
     closest = getClosestFood(data);
     print 'close food - ',closest
     
-    last = getDir(last,me,'','old')
+    last = getDir(last,me,'','old',[])
     print 'coming from - ',last
     
-    dir = getDir(me,closest,last,'new')
+    dir = getDir(me,closest,last,'new',[])
     print 'going to - ',dir
     next = nextPoint(me, dir)
     print 'next - ',next
