@@ -162,7 +162,7 @@ def start():
     # TODO: Do things with data
 
     return {
-        'color': '#FF6666',
+        'color': '#FFF8E7',
         'taunt': 'BABY FACE WILL WIN',
         'head_url': head_url,
         '"head_type': 'pixel',
