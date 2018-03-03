@@ -39,7 +39,6 @@ def start():
 def move():
     data = bottle.request.json
     print data
-    
 	print data.get('you')
 	
     # TODO: Do things with data
