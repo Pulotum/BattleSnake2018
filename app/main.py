@@ -3,6 +3,9 @@ import os
 import random
 import math
 
+from pathfinding.core.grid import Grid
+from pathfinding.finder.a_star import AStarFinder
+
 #
 #return [x,y] array of cords
 def getClosestFood(data):
