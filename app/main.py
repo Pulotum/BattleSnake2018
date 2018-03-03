@@ -5,7 +5,7 @@ import math
 
 def getClosestFood(data):
     
-    for f in data.get('food').get('body').get('data'):
+    for f in data.get('food').get('data'):
         print 'food ',f.get('x'),'x',f.get('y')
 
 @bottle.route('/')
