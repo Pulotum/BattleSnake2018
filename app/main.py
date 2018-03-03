@@ -2,7 +2,8 @@ import bottle
 import os
 import random
 
-
+def getClosestFood(data, grid):
+	return true;
 
 @bottle.route('/')
 def static():
@@ -21,17 +22,17 @@ def start():
     board_width = data.get('width')
     board_height = data.get('height')
 
-    head_url = '%s://%s/static/head.png' % (
-        bottle.request.urlparts.scheme,
-        bottle.request.urlparts.netloc
-    )
+	head_url = 'https://thumb1.shutterstock.com/display_pic_with_logo/88356/107460737/stock-photo-beautiful-expressive-adorable-happy-cute-laughing-smiling-baby-infant-face-showing-tongue-isolated-107460737.jpg';
 
     # TODO: Do things with data
 
     return {
-        'color': '#00FF00',
-        'taunt': '{} ({}x{})'.format(game_id, board_width, board_height),
-        'head_url': head_url
+        'color': '#ff6666',
+        'taunt': 'BABY SNAKE WILL WIN!',
+        'head_url': head_url,
+		'name': 'Baby Face',
+		'head_type': 'safe',
+		'tail_type': 'pixel'
     }
 
 
@@ -43,10 +44,12 @@ def move():
     
     directions = ['up', 'down', 'left', 'right']
     direction = random.choice(directions)
+	
+	print ("going this way - ", direction);
+	
     print direction
     return {
-        'move': direction,
-        'taunt': 'battlesnake-python!'
+        'move': direction
     }
 
 
