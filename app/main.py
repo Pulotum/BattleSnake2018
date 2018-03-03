@@ -220,7 +220,7 @@ def move():
         result = isSafe(data, next, notSafe,allSnakes)
         print 'new result - ',result
     
-    map = makeMap(data)
+    map = makeMap(data, allSnakes)
     
     for m in map:
         print m
