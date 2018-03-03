@@ -59,13 +59,13 @@ def doesPathExist(map, me, food):
 #return direction
 def getDir(me, food, last):
 
-    if (me[1] > food[1]) and (last != 'up'):
+    if (me[1] > food[1]) and (last != 'down'):
         dir = 'up'
-    elif (me[1] < food[1]) and (last != 'down'):
+    elif (me[1] < food[1]) and (last != 'up'):
         dir = 'down'
-    elif (me[0] > food[0]) and (last != 'left'):
+    elif (me[0] > food[0]) and (last != 'right'):
         dir = 'left'
-    elif (me[0] < food[0]) and (last != 'right'):
+    elif (me[0] < food[0]) and (last != 'left'):
         dir = 'right'
         
     return dir
