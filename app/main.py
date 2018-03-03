@@ -25,7 +25,7 @@ def makeMap(data):
         for snek in snake.get('body').get('data'):
             print 'snek',snek
             print 'x',snek.get('x')
-            map[snek.get('x'), snek.get('y')] = 's'
+            map[snek.get('x')][snek.get('y')] = 's'
 
     return map
 
