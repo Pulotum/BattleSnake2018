@@ -115,12 +115,8 @@ def nextPoint(me, dir):
     
 #takes [point], ["past"]
 #return bool for safety
-def isSafe(data, point, old):
+def isSafe(data, point, old, allSnakes):
 
-    allSnakes = getAllSnakes(data)
-
-    print 'all snakes - ',allSnakes
-    
     safe = True
     #check if point is in snakes or me
     if [point[0],point[1]] in allSnakes:
@@ -199,7 +195,10 @@ def move():
     next = nextPoint(me, dir)
     print 'next - ',next
     
-    result = isSafe(data, next, [])
+    allSnakes = getAllSnakes(data)
+    print 'all snakes - ',allSnakes
+    
+    result = isSafe(data, next, [], allSnakes)
     print 'is safe - ',result
     
     notSafe = []
@@ -222,7 +221,7 @@ def move():
         next = nextPoint(me, dir)
         print 'new next - ',next
         
-        result = isSafe(data, next, notSafe)
+        result = isSafe(data, next, notSafe,allSnakes)
         print 'new result - ',result
     
     '''
