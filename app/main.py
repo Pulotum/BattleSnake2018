@@ -13,9 +13,7 @@ def getClosestFood(data):
     closestCord = []
     closestDist = 1000
     
-    for f in data.get('food').get('data'):
-        print 'food',f.get('x'),f.get('y')
-        
+    for f in data.get('food').get('data')        
         curX = abs(meX - f.get('x'))
         curY = abs(meY - f.get('y'))
         curDist = curY + curX
@@ -24,7 +22,6 @@ def getClosestFood(data):
             closestDist = curDist
             closestCord = [f.get('x'),f.get('y')]
     
-    print closestCord
     return closestCord
 
 #takes [meX,meY] and [foodX,foodY]
@@ -74,19 +71,23 @@ def start():
 @bottle.post('/move')
 def move():
     data = bottle.request.json
-    meX = data.get('you').get('body').get('data')[0].get('x')
-    meY = data.get('you').get('body').get('data')[0].get('y')
+    me = [data.get('you').get('body').get('data')[0].get('x'),data.get('you').get('body').get('data')[0].get('y')]
 	
-    print meX, meY
+    print me
     
     closest = getClosestFood(data);
-    dir = getDir([meX,meY],closest)
+    
+    print closest
+    
+    dir = getDir(me,closest)
+    
+    print dir
     
     # TODO: Do things with data
     
     directions = ['up', 'down', 'left', 'right']
     direction = random.choice(directions)
-    print dir
+    
     return {
         'move': dir,
         'taunt': 'BABY FACE'
