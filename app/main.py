@@ -106,7 +106,7 @@ def isSafe(data, point,past):
         return True
     
     if safe == False:
-        return past.append([point[0]],[point[1]])
+        return past.append([point[0],point[1]])
     else:
         return True;
 
@@ -142,6 +142,11 @@ def start():
 
 @bottle.post('/move')
 def move():
+
+    print '--------------------'
+    print 'New Move'
+    print '--------------------'
+
     data = bottle.request.json
     me = [data.get('you').get('body').get('data')[0].get('x'),data.get('you').get('body').get('data')[0].get('y')]
     last = [data.get('you').get('body').get('data')[1].get('x'),data.get('you').get('body').get('data')[1].get('y')]
