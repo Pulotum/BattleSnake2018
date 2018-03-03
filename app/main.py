@@ -67,8 +67,17 @@ def getClosestFood(data, num):
 
 #takes map, [me], [food]
 #return bool
-def doesPathExist(map, me, food):
-    return True
+def getAllSnakes():
+    snakes = []
+    
+    for snake in data.get('snakes').get('data'):
+        for snek in snake.get('body').get('data'):
+            snakes.append([snek.get('x'),snek.get('y')])
+
+    for snake in data.get('you').get('body').get('data'):
+        snakes.append([snek.get('x'),snek.get('y')])
+    
+    return snakes
 
 #takes [me] and [point] "last dir" "method" ['dir']
 #return direction
@@ -108,8 +117,15 @@ def nextPoint(me, dir):
 #return bool for safety
 def isSafe(data, point, old):
 
+    allSnakes = getAllSnakes()
+
+    print 'all snakes - ',allSnakes
+    
     safe = True
     #check if point is in snakes or me
+    if [point[0],point[1]] in allSnakes:
+        safe = False
+    '''
     for snake in data.get('snakes').get('data'):
         for snek in snake.get('body').get('data'):
             if (point[0] == snek.get('x')) and (point[1] == snek.get('y')):
@@ -118,6 +134,7 @@ def isSafe(data, point, old):
     for snake in data.get('you').get('body').get('data'):
         if (point[0] == snek.get('x')) and (point[1] == snek.get('y')):
             safe = False
+    '''
     
     if len(old) > 3:
         return True
@@ -208,9 +225,9 @@ def move():
         result = isSafe(data, next, notSafe)
         print 'new result - ',result
     
+    '''
     map = makeMap(data)
     
-    '''
     for m in map:
         print m
     '''
