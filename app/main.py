@@ -184,10 +184,9 @@ def move():
     dir = getDir(me,closest,last,'new',[])
     print 'going to - ',dir
     
-    i = 0
     while dir == 'not':
-        dir = getDir(me,getRandomFood(data),last,'new',[])
-        i = i + 1
+        closest = getRandomFood(data)
+        dir = getDir(me,closest,last,'new',[])
     
     next = nextPoint(me, dir)
     print 'next - ',next
