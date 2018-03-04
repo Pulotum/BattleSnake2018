@@ -27,19 +27,14 @@ def makeMap(data, allSnakes):
 
 #takes data, number of closet
 #return [x,y] array of cords
-def getClosestFood(data, num):
+def getClosestFood(data):
     
     meX = data.get('you').get('body').get('data')[0].get('x')
     meY = data.get('you').get('body').get('data')[0].get('y')
-    
-    pastCord = []
-    pastDist = []
-    
+        
     closestCord = []
     closestDist = 1000
-    
-    i = 0
-    
+        
     for f in data.get('food').get('data'):
         curX = abs(meX - f.get('x'))
         curY = abs(meY - f.get('y'))
@@ -47,20 +42,20 @@ def getClosestFood(data, num):
         
         if curDist < closestDist:
         
-            if i > 0:
-                pastCord.append(closestCord)
-                pastDist.append(closestDist)
-        
-            i = i + 1
-        
             closestDist = curDist
             closestCord = [f.get('x'),f.get('y')]
     
-    if num == 0:
-        return closestCord
-    else:
-        return pastCord[num]
+    return closestCord
 
+def getRandomFood(data):
+    
+    foods = []
+
+    for f in data.get('food').get('data'):
+        foods.append([f.get('x'),f.get('y')])
+        
+    return random.choice(foods)
+    
 #takes map, [me], [food]
 #return bool
 def getAllSnakes(data):
@@ -180,7 +175,7 @@ def move():
     print 'prev - ',last
     print 'current - ',me
     
-    closest = getClosestFood(data, 0)
+    closest = getClosestFood(data)
     print 'close food - num 0',closest
     
     last = getDir(last,me,'','old',[])
@@ -191,7 +186,7 @@ def move():
     
     i = 0
     while dir == 'not':
-        dir = getDir(me,getClosestFood(data, i),last,'new',[])
+        dir = getDir(me,getRandomFood(data),last,'new',[])
         i = i + 1
     
     next = nextPoint(me, dir)
@@ -214,7 +209,7 @@ def move():
         if dir == 'not':
             dir = last
         
-        closest = getClosestFood(data, len(notSafe))
+        closest = getRandomFood(data)
         print 'new closest - num',len(notSafe),closest
         
         dir = getDir(me,closest,last,'new',notSafe)
