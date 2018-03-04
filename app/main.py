@@ -206,7 +206,8 @@ def move():
         print 'not safes - ', notSafe
         
         if dir == 'not':
-            dir = last
+            closest = getRandomFood(data)
+            dir = getDir(me,closest,last,'new',[])
         
         closest = getRandomFood(data)
         print 'new closest - num',len(notSafe),closest
